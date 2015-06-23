@@ -8,8 +8,11 @@
 <p>
 Move your mouse pointer around over the grey area. Every 5 seconds, the corresponding polynomial
 of degree 5 will be computed and prediction will be made if the mouse pointer would have crossed / touched
-the red area on the right. All output can be found in the console.
+the red area on the right.
 </p>
+
+<div id="output">
+</div>
 
 <table width="100%" height="100%">
   <tr>
@@ -28,12 +31,24 @@ the red area on the right. All output can be found in the console.
   var polymovial = new polymovial('polymovial-example', 1024, 5, 10, matf);
   window.setInterval(function(polymovial) {
     console.log("Polynomial (past 5 seconds):");
-
+    
     var poly = polymovial.obtainPolynomial();
+    
+    var txt = '';
+    txt += 'poly: ' + JSON.stringify( poly );
+    txt += '<br>';
+    txt += "Mouse pointer would have crossed / touched the banner: ";
+    txt += polymovial.checkIntersection('banner', poly) ? "yes" : "no";
+    
+    var output = document.getElementById('output');
+    output.innerHTML = txt;
+    
+    /*
     console.log(poly);
     console.log("Mouse pointer would have crossed / touched the banner:");
     console.log(polymovial.checkIntersection('banner', poly) ? "yes" : "no");
-  }, 5000, polymovial);
+    */
+  }, 100, polymovial);
 </script>
 </body>
 </html>
